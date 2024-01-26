@@ -1,27 +1,15 @@
-result = []
+numbers = []
 
 ARGV.each do |arg|
-    # skip if not integer
-    next if arg !~ /^-?[0-9]+$/
+    # Skip if not an integer
+    next unless arg =~ /^-?\d+$/
 
-    # convert to integer
-    i_arg = arg.to_i
+    # Convert to integer
+    number = arg.to_i
     
-    # insert result at the right position
-    is_inserted = false
-    i = 0
-    l = result.size
-    while !is_inserted && i < l do
-        if result[i] <= i_arg  # Modified condition to handle equal elements
-            i += 1
-        else
-            result.insert(i, i_arg)  # Corrected the index for insertion
-            is_inserted = true
-            break
-        end
-    end
-    result << i_arg if !is_inserted
+    # Insert the number at the right position
+    index = numbers.find_index { |n| n > number } || numbers.size
+    numbers.insert(index, number)
 end
 
-puts result.join(' ')
-
+puts numbers.join(' ')
